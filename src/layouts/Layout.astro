@@ -1,0 +1,75 @@
+---
+import { NavigationBar } from '@/components/NavigationBar'
+import { Toaster } from '@/components/ui/sonner'
+import '@/styles/globals.css'
+import SpeedInsights from '@vercel/speed-insights/astro'
+import { Image } from 'astro:assets'
+import { ClientRouter } from 'astro:transitions'
+import 'sonner/dist/styles.css'
+
+interface Props {
+  title?: string
+  background?: string
+  backgroundTransitionName?: string
+}
+
+const { title, background, backgroundTransitionName } = Astro.props
+
+const isProfilePage = Astro.url.pathname === '/profile'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title || 'SlamStats'}</title>
+
+    <ClientRouter />
+    <SpeedInsights />
+  </head>
+  <body class="dark">
+    {
+      background && (
+        <Image
+          class="absolute top-0 left-0 h-full w-full object-cover"
+          style="mask-image: linear-gradient(transparent 40%, black);"
+          src={background}
+          transition:name={backgroundTransitionName || undefined}
+          alt={'clay'}
+          width={500}
+          height={500}
+        />
+      )
+    }
+
+    <div
+      class="min-h-screen dark:bg-transparent z-10 relative dark:bg-dot-white/[0.2] bg-dot-black/[0.2]"
+    >
+      <NavigationBar client:load isProfilePage={isProfilePage} />
+      <Toaster client:load />
+      <slot />
+    </div>
+    <style is:global>
+      :root {
+        --accent: 136, 58, 234;
+        --accent-light: 224, 204, 250;
+        --accent-dark: 49, 10, 101;
+        --accent-gradient: linear-gradient(
+          45deg,
+          rgb(var(--accent)),
+          rgb(var(--accent-light)) 30%,
+          white 60%
+        );
+      }
+      html {
+        font-family: system-ui, sans-serif;
+        background: #13151a;
+        background-size: 224px;
+      }
+    </style>
+  </body>
+</html>

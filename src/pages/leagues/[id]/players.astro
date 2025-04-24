@@ -1,0 +1,12 @@
+---
+import AddPlayersForm from '@/components/AddPlayersForm'
+import Layout from '@/layouts/Layout.astro'
+
+const { id } = Astro.params
+
+if (!id) return
+---
+
+<Layout>
+  <AddPlayersForm client:load leagueId={id} />
+</Layout>

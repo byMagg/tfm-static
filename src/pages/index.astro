@@ -1,0 +1,39 @@
+---
+import { HeroScroll } from '@/components/HeroScroll'
+import { TracingBeamDemo } from '@/components/TracingBeam'
+import { Highlight } from '@/components/ui/hero-highlight'
+import { motion } from 'framer-motion'
+import Layout from '../layouts/Layout.astro'
+---
+
+<Layout>
+  <main>
+    <section class="flex items-center min-h-[calc(100vh-56px)]">
+      <motion.h1
+        client:visible
+        initial={{
+          opacity: 0,
+          y: 20,
+        }}
+        animate={{
+          opacity: 1,
+          y: [20, -5, 0],
+        }}
+        transition={{
+          duration: 0.5,
+          ease: [0.4, 0.0, 0.2, 1],
+        }}
+        className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
+      >
+        Tu liga de tenis, en la palma de tu mano
+        <Highlight client:visible className="text-black dark:text-white">
+          SLAM STATS
+        </Highlight>
+      </motion.h1>
+    </section>
+    <section>
+      <HeroScroll client:visible />
+      <TracingBeamDemo client:visible />
+    </section>
+  </main>
+</Layout>
