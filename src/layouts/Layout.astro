@@ -1,5 +1,4 @@
 ---
-import { NavigationBar } from '@/components/NavigationBar'
 import { Toaster } from '@/components/ui/sonner'
 import '@/styles/globals.css'
 import SpeedInsights from '@vercel/speed-insights/astro'
@@ -14,8 +13,6 @@ interface Props {
 }
 
 const { title, background, backgroundTransitionName } = Astro.props
-
-const isProfilePage = Astro.url.pathname === '/profile'
 ---
 
 <!doctype html>
@@ -49,7 +46,6 @@ const isProfilePage = Astro.url.pathname === '/profile'
     <div
       class="min-h-screen dark:bg-transparent z-10 relative dark:bg-dot-white/[0.2] bg-dot-black/[0.2]"
     >
-      <NavigationBar client:load isProfilePage={isProfilePage} />
       <Toaster client:load />
       <slot />
     </div>

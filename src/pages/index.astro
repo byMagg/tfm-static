@@ -1,4 +1,5 @@
 ---
+import { EvervaultCard } from '@/components/EvervaultCard'
 import { HeroScroll } from '@/components/HeroScroll'
 import { TracingBeamDemo } from '@/components/TracingBeam'
 import { Highlight } from '@/components/ui/hero-highlight'
@@ -31,9 +32,18 @@ import Layout from '../layouts/Layout.astro'
         </Highlight>
       </motion.h1>
     </section>
-    <section>
-      <HeroScroll client:visible />
-      <TracingBeamDemo client:visible />
+    <section
+      class="flex flex-col gap-8 items-center justify-center max-w-4xl mx-auto py-16 px-4"
+    >
+      <article>
+        <HeroScroll client:visible />
+      </article>
+      <article>
+        <TracingBeamDemo client:visible />
+      </article>
+      <article>
+        <EvervaultCard client:visible />
+      </article>
     </section>
   </main>
 </Layout>
